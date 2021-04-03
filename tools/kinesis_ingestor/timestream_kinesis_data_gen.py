@@ -41,7 +41,7 @@ def random_vin():
 def generateDimensions(scaleFactor):
     dimensionsMetrics = list()
     count = 0
-    while count < scaleFactor:
+    while count < scaleFactor*100000:
         count += 1
         trip_id = str(uuid.uuid4())
         vin = random_vin()
@@ -82,7 +82,7 @@ def createRandomMetrics(timestamp, timeUnit):
 
 
 
-def send_records_to_kinesis(dimensions, kinesis_client, stream_name, sleep_time, percent_late, late_time):
+def send_records_to_kinesis(all_dimensions, kinesis_client, stream_name, sleep_time, percent_late, late_time):
     while True:
         if percent_late > 0:
             value = random.random()*100
@@ -95,8 +95,8 @@ def send_records_to_kinesis(dimensions, kinesis_client, stream_name, sleep_time,
         else:
             local_timestamp = int(time.time())
 
-        for series_id, dimensions in enumerate(dimensions):
-            metrics = createRandomMetrics(series_id, local_timestamp, "SECONDS")
+        for series_id, dimensions in enumerate(all_dimensions):
+            metrics = createRandomMetrics(local_timestamp, "SECONDS")
 
             dimensions = dimensions._asdict()  # convert named tuple to dict
             records = []
