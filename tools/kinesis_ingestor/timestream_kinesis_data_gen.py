@@ -24,7 +24,7 @@ engine_rpm = 'engine_rpm'
 
 systolic='systolic'
 diastolic = 'diastolic'
-temp = 'diastolic'
+temp = 'temp'
 
 
 ###
@@ -135,12 +135,11 @@ measuresForMetrics = [systolic, diastolic, temp, powertrainState, ignition_state
                       bms_volt_min_value, bms_temp_max_ida, bms_temp_max_idc, bms_temp_max_value, bms_temp_min_ida,bms_temp_min_idc, bms_temp_min_value, bms_iso_resistance,
                       bms_balancing, bms_res_energy, bms_deenergisation, bms_warn, bms_faults_quant, bms_id_nr,bms_id_length, bms_tba_ida_1,
                       bms_tba_charge_state_1, bms_tba_volt_1, bms_tba_curr_1, bms_tba_cells_1,bms_tba_tprobes_1, bms_tba_ida_2, bms_tba_charge_state_2, bms_tba_volt_2,
-                      bms_tba_curr_2,bms_tba_cells_2,bms_tba_tprobes_2
-                      ]
+                      bms_tba_curr_2,bms_tba_cells_2,bms_tba_tprobes_2]
 
 
 
-DimensionsMetric = namedtuple('DimensionsMetric', 'vin, trip_id, systolic, diastolic, pressureLevel, temp')
+DimensionsMetric = namedtuple('DimensionsMetric', 'vin, trip_id, pressureLevel')
 
 
 # Function to get the randomvin
@@ -192,31 +191,31 @@ def createRandomMetrics(timestamp, timeUnit):
     records.append(create_record(temp, random.randint(0, 1000), "DOUBLE", timestamp, timeUnit))
 
     remainingmetrics = [powertrainState, ignition_state, bms_soc2, odo, speed, gear,
-                          engine_rpm,
-                          combustion_engine_state, accel_pedal_position, plugin_hybrid_operation_mode,
-                          consumption_electric,
-                          obl_mode, obl_evse_flt, obl_flt, brake_pedal_stat, breaksys_warn_0, em2_dc_voltage, em2_rpm,
-                          em2_torque,
-                          em2_dc_current, dcb_mode, dcb_evse_flt, dcb_flt,
-                          dcdc_mode, dcdc_warn_1, dcdc_warn_0, em2_state, residual_range, pnhv_charging_energyflow,
-                          pnhv_chargesource_type, em2_inverter_temp,
-                          em2_stator_temp, pnhv_ac_chrg, pnhv_dc_chrg, pnhv_wpt_chrg, evse_cert_err, evse_protocol_err,
-                          em1_dc_voltage, em1_rpm, em1_torque,
-                          em1_dc_current, em1_inverter_temp, em1_state, em1_stator_temp, gps_latitude, gps_longitude,
-                          gps_heading, gps_velocity, em1_can_com,
-                          em2_can_com, can_com_batt, can_com_ev, can_com_diag, rtm_warning_active, bms_protocol_version,
-                          bms_total_voltage, bms_total_current,
-                          bms_soc, bms_tba_quant, bms_charge_state, bms_volt_max_ida, bms_volt_max_idc,
-                          bms_volt_max_value, bms_volt_min_ida, bms_volt_min_idc,
-                          bms_volt_min_value, bms_temp_max_ida, bms_temp_max_idc, bms_temp_max_value, bms_temp_min_ida,
-                          bms_temp_min_idc, bms_temp_min_value, bms_iso_resistance,
-                          bms_balancing, bms_res_energy, bms_deenergisation, bms_warn, bms_faults_quant, bms_id_nr,
-                          bms_id_length, bms_tba_ida_1,
-                          bms_tba_charge_state_1, bms_tba_volt_1, bms_tba_curr_1, bms_tba_cells_1, bms_tba_tprobes_1,
-                          bms_tba_ida_2, bms_tba_charge_state_2, bms_tba_volt_2,
-                          bms_tba_curr_2, bms_tba_cells_2, bms_tba_tprobes_2
-                          ]
+                          engine_rpm]
 
+                          #,
+                          #combustion_engine_state, accel_pedal_position, plugin_hybrid_operation_mode,
+                          #consumption_electric,
+                          #obl_mode, obl_evse_flt, obl_flt, brake_pedal_stat, breaksys_warn_0, em2_dc_voltage, em2_rpm,
+                          #em2_torque,
+                          #em2_dc_current, dcb_mode, dcb_evse_flt, dcb_flt,
+                          #dcdc_mode, dcdc_warn_1, dcdc_warn_0, em2_state, residual_range, pnhv_charging_energyflow,
+                          #pnhv_chargesource_type, em2_inverter_temp,
+                          #em2_stator_temp, pnhv_ac_chrg, pnhv_dc_chrg, pnhv_wpt_chrg, evse_cert_err, evse_protocol_err,
+                          #em1_dc_voltage, em1_rpm, em1_torque,
+                          #em1_dc_current, em1_inverter_temp, em1_state, em1_stator_temp, gps_latitude, gps_longitude,
+                          #gps_heading, gps_velocity, em1_can_com,
+                          #em2_can_com, can_com_batt, can_com_ev, can_com_diag, rtm_warning_active, bms_protocol_version,
+                          #bms_total_voltage, bms_total_current,
+                          #bms_soc, bms_tba_quant, bms_charge_state, bms_volt_max_ida, bms_volt_max_idc,
+                          #bms_volt_max_value, bms_volt_min_ida, bms_volt_min_idc,
+                          #bms_volt_min_value, bms_temp_max_ida, bms_temp_max_idc, bms_temp_max_value, bms_temp_min_ida,
+                          #bms_temp_min_idc, bms_temp_min_value, bms_iso_resistance,
+                          #bms_balancing, bms_res_energy, bms_deenergisation, bms_warn, bms_faults_quant, bms_id_nr,
+                          #bms_id_length, bms_tba_ida_1,
+                          #bms_tba_charge_state_1, bms_tba_volt_1, bms_tba_curr_1, bms_tba_cells_1, bms_tba_tprobes_1,
+                          #bms_tba_ida_2, bms_tba_charge_state_2, bms_tba_volt_2,
+                          #bms_tba_curr_2, bms_tba_cells_2, bms_tba_tprobes_2]
 
     for measure in remainingmetrics:
         value = 100.0 * random.random()
@@ -245,21 +244,20 @@ def send_records_to_kinesis(all_dimensions, kinesis_client, stream_name, sleep_t
             for metric in metrics:
                 metric.update(dimensions)  # adds the dimensions into metric dict
                 data = json.dumps(metric)
-                records.append({'Data': bytes(data, 'utf-8'), 'PartitionKey': metric['vin']})
+                records.append({'Data': bytes(data, 'utf-8'), 'PartitionKey': metric['trip_id']})
 
             kinesis_client.put_records(StreamName=stream_name, Records=records)
 
             print("Wrote {} records to Kinesis Stream '{}'".format(len(metrics), stream_name))
-        
+
         if sleep_time > 0:
-            time.sleep(float(sleep_time)) 
+            time.sleep(float(sleep_time))
 
 def main(args):
     print(args)
     host_scale = args.hostScale  # scale factor for the hosts.
 
     dimension_measures = generateDimensions(host_scale)
-
     print("Dimensions for metrics: {}".format(len(dimension_measures)))
 
     def signal_handler(sig, frame):
